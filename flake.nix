@@ -33,13 +33,16 @@
           };
 
           build-system = with pkgs.python3Packages; [
-            setuptools
+            poetry-core
           ];
 
           dependencies = with pkgs.python3Packages; [
             click
             rmscene
           ];
+
+          # rmc 0.3.0 pins rmscene<0.7.0 but nixpkgs has 0.7.0 which works fine
+          pythonRelaxDeps = [ "rmscene" ];
 
           meta = with pkgs.lib; {
             description = "Convert to/from v6 .rm files from the reMarkable tablet";
@@ -54,21 +57,16 @@
           rmc                 # .rm file conversion (Python)
           pkgs.librsvg        # SVG to PNG (rsvg-convert)
           pkgs.typst          # Markdown to PDF
-          pkgs.poppler_utils  # PDF to images (pdftoppm, pdfinfo)
+          pkgs.poppler-utils  # PDF to images (pdftoppm, pdfinfo)
           pkgs.imagemagick    # Image compositing (magick)
         ];
 
         # Native build inputs for compiling the Rust project
         nativeBuildInputs = with pkgs; [
           pkg-config
-        ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-          pkgs.darwin.apple_sdk.frameworks.Security
-          pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
         ];
 
-        buildInputs = with pkgs; [
-          openssl
-        ];
+        buildInputs = [];
 
       in
       {
