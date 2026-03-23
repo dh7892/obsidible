@@ -1,0 +1,25 @@
+[package]
+name = "obsidible"
+version = "0.1.0"
+edition = "2024"
+description = "Convert and transport documents between Obsidian and reMarkable"
+
+[dependencies]
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+anyhow = "1"
+
+# Utilities
+tempfile = "3"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+zip = "2"

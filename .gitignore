@@ -1,0 +1,8 @@
+/target
+.obsidible/
+*.rmdoc
+*.swp
+*.swo
+.DS_Store
+pensions.zip
+config.example.toml
